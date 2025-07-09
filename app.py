@@ -2,11 +2,10 @@ from flask import Flask, render_template, request, redirect, session, url_for
 import sqlite3
 from functools import wraps
 from datetime import datetime
-from config import KULLANICI_ADI, SIFRE  # config.py'den kullanıcı bilgileri
+from config import KULLANICI_ADI, SIFRE  
 
 app = Flask(__name__)
-app.secret_key = "gizli_anahtar"  # Bunu da mümkünse environment variable yapabilirsin
-
+app.secret_key = "gizli_anahtar"  
 SESSION_TIMEOUT = 300  # 5 dakika (saniye cinsinden)
 
 def db():
