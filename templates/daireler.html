@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3 class="mb-3">🏠 Daire Listesi</h3>
+
+<form method="post" class="border p-4 mb-4 bg-light rounded shadow-sm" style="max-width: 400px;">
+    <input type="text" name="daire_no" placeholder="Daire No" required class="form-control mb-2">
+    <input type="text" name="isim" placeholder="İsim" required class="form-control mb-3">
+    <button class="btn btn-primary w-100">Daire Ekle</button>
+</form>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr><th>ID</th><th>Daire No</th><th>İsim</th><th>İşlem</th></tr>
+    </thead>
+    <tbody>
+        {% for daire in daireler %}
+        <tr>
+            <td>{{ daire.id }}</td>
+            <td>{{ daire.daire_no }}</td>
+            <td>{{ daire.isim }}</td>
+            <td>
+                <a href="/daire_sil/{{ daire.id }}" class="btn btn-sm btn-outline-danger"
+                   onclick="return confirm('Daire silinsin mi?')">Sil</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

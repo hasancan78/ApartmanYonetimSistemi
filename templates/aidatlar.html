@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3 class="mb-3">💰 Aidat Listesi</h3>
+
+<form method="post" class="border p-4 mb-4 bg-light rounded shadow-sm" style="max-width: 400px;">
+    <label for="daire_id" class="form-label">Daire Seç</label>
+    <select name="daire_id" id="daire_id" class="form-select mb-3" required>
+        <option value="" disabled selected>Daire seçiniz</option>
+        {% for daire in daireler %}
+        <option value="{{ daire.id }}">{{ daire.daire_no }} - {{ daire.isim }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="tutar" class="form-label">💰 Aidat Tutarı</label>
+    <input type="number" name="tutar" id="tutar" class="form-control mb-3" required placeholder="Örn: 500" min="0">
+
+    <button type="submit" class="btn btn-success w-100">Aidat Kaydet</button>
+</form>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Daire No</th>
+            <th>İsim</th>
+            <th>Tutar</th>
+            <th>Tarih</th>
+            <th>Durum</th>
+            <th style="width: 180px;">İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for aidat in aidatlar %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ aidat.daire_no }}</td>
+            <td>{{ aidat.isim }}</td>
+            <td>{{ aidat.tutar }} ₺</td>
+            <td>{{ aidat.tarih }}</td>
+            <td>
+                {% if aidat.odendi %}
+                    <span class="badge bg-success">Ödendi</span>
+                {% else %}
+                    <span class="badge bg-danger">Bekliyor</span>
+                {% endif %}
+            </td>
+            <td>
+                <div class="d-flex gap-2">
+                    {% if not aidat.odendi %}
+                    <a href="/odendi/{{ aidat.id }}" class="btn btn-sm btn-outline-success">Ödendi</a>
+                    {% endif %}
+                    <a href="/aidat_sil/{{ aidat.id }}" class="btn btn-sm btn-outline-danger"
+                       onclick="return confirm('Silmek istediğine emin misin?')">Sil</a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3>Raporlar</h3>
+
+<h5>Borçlu Daireler</h5>
+<table class="table table-bordered mb-4">
+    <thead>
+        <tr><th>Daire No</th><th>İsim</th><th>Tutar</th><th>Tarih</th></tr>
+    </thead>
+    <tbody>
+        {% for b in borclar %}
+        <tr>
+            <td>{{ b.daire_no }}</td>
+            <td>{{ b.isim }}</td>
+            <td>{{ b.tutar }}</td>
+            <td>{{ b.tarih }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h5>Tüm Giderler</h5>
+<table class="table table-bordered">
+    <thead>
+        <tr><th>Açıklama</th><th>Tutar</th><th>Tarih</th></tr>
+    </thead>
+    <tbody>
+        {% for g in giderler %}
+        <tr>
+            <td>{{ g.aciklama }}</td>
+            <td>{{ g.tutar }}</td>
+            <td>{{ g.tarih }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

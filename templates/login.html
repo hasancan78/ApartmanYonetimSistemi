@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="card shadow-sm p-4 col-md-6 mx-auto mt-5">
+    <h4 class="mb-3">🔐 Yönetici Girişi</h4>
+    {% if hata %}
+        <div class="alert alert-danger">{{ hata }}</div>
+    {% endif %}
+    <form method="post">
+        <input name="kullanici" class="form-control mb-2" placeholder="Kullanıcı Adı" required autofocus>
+        <input name="sifre" type="password" class="form-control mb-3" placeholder="Şifre" required>
+        <button class="btn btn-primary w-100">Giriş Yap</button>
+    </form>
+</div>
+{% endblock %}

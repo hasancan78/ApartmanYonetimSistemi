@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3 class="mb-3">💸 Giderler</h3>
+
+<form method="post" class="border p-4 mb-4 bg-light rounded shadow-sm" style="max-width: 400px;">
+    <input type="text" name="aciklama" placeholder="Açıklama" required class="form-control mb-2">
+    <input type="number" name="tutar" placeholder="Tutar" required class="form-control mb-3">
+    <button class="btn btn-primary w-100">Gider Ekle</button>
+</form>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr><th>ID</th><th>Açıklama</th><th>Tutar</th><th>Tarih</th><th>İşlem</th></tr>
+    </thead>
+    <tbody>
+        {% for gider in giderler %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ gider.aciklama }}</td>
+            <td>{{ gider.tutar }} ₺</td>
+            <td>{{ gider.tarih }}</td>
+            <td>
+                <a href="/gider_sil/{{ gider.id }}" class="btn btn-sm btn-outline-danger"
+                   onclick="return confirm('Gider kaydı silinsin mi?')">Sil</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
